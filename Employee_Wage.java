@@ -2,10 +2,7 @@ package com.bridgelabz.problem;
 public class Employee_Wage{
 	public static final int IS_FULL_TIME = 0;
 	public static final int IS_PART_TIME=1;
-	public static final int EMP_WAGE_PER_HOUR=20;
-	public static final int MAX_OF_WORKING_DAY=20;
-	public static final int MAX_HRS_IN_MONTH=110;
-	public static void computeEmpWage(){
+	public static void calcEmpWage(String company,int empRatePerHr,int numOfWorkingDays,int maxHrs){
 		//variables
 		int totalWage=0;
 		int totalWorkingHour=0;
@@ -26,15 +23,16 @@ public class Employee_Wage{
 			   }
 			   totalWorkingHour=empHrs+totalWorkingHour;
 			   totalWorkingDays++;
-			   empWage=empHrs*Emp_Wage_Per_Hour;
+			   empWage=empHrs*empRatePerHr;
 			   totalWage=empWage+totalWage;
 			   System.out.println("Employee Wage on "+totalWorkingDays+" Day is: "+empWage);
-			   if(totalWorkingDays==MAX_OF_WORKING_DAY ||totalWorkingHour>=MAX_HRS_IN_MONTH)
+			   if(totalWorkingDays==numOfWorkingDays||totalWorkingHour>=maxHrs)
 				   break;
-			   }
-	  System.out.println("Total Employee Wage = "+totalWage);	
-	  }
-	  public static void main(String[] args){
-	      computeEmpWage();
-	  }
+	       }
+	 System.out.println("Total Employee Wage = "+totalWage);	
+	 }
+         public static void main(String[] args){
+             calcEmpWage("Capgemini",20,2,10);
+	     calcEmpWage("Bridgelabz",10,4,43);
+	 }
 }
