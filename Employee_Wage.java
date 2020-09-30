@@ -2,7 +2,7 @@ package com.bridgelabz.problem;
 public class Employee_Wage{
 	public static final int IS_FULL_TIME = 0;
 	public static final int IS_PART_TIME=1;
-	public static final int Emp_Wage_Per_Hour=20;
+	public static final int EMP_WAGE_PER_HOUR=20;
 	public static final int MAX_OF_WORKING_DAY=20;
 	public static final int MAX_HRS_IN_MONTH=100;
 	public static void computeEmpWage(){
