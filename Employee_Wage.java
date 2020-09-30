@@ -33,6 +33,6 @@ public class Employee_Wage{
         if(totalWorkingDays==NUM_OF_WORKING_DAYS ||totalWorkingHour>=MAX_HRS_IN_MONTH)
 			   break;
         }
-        System.out.println("Total Employee Wage = "+Totalwage);
+        System.out.println("Total Employee Wage = "+totalWage);
     }
 }
