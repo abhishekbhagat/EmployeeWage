@@ -2,20 +2,22 @@ package com.bridgelabz.problem;
 public class Employee_Wage{
 	public static final int IS_FULL_TIME = 0;
 	public static final int IS_PART_TIME=1;
-	private final String company;
-	private final int empRatePerHour;
-	private final int numOfWorkingDays;
-	private final int maxHoursPerMonth;
-	private int totalEmpWage;
-	
-	//constants
-	public Employee_Wage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth){
-		this.company=company;
-		this.empRatePerHour=empRatePerHour;
-		this.numOfWorkingDays=numOfWorkingDays;
-		this.maxHoursPerMonth=maxHoursPerMonth;
+	private int numOfCompany=0;
+	private CompanyEmpWage[] companyEmpWageArray;
+	public Employee_Wage()
+	{
+		companyEmpWageArray=new CompanyEmpWage[5];
+	}
+	public static void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth){
+		companyEmpWageArray[numOfCompany]=new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth)
+		numOfCompany++;
 	}
 	public void computeEmpWage(){
+		for(int i=0;i<numOfCompany;i++){
+			companyEmpWageArray[i].setTotalEmpWaage(this.computeEmpwage(companyEmpWageArray[i]));
+			System.out.println(companyEmpWageArray[i]);
+		}
+		private int computeEmpWage(CompanyEmpWage companyEmpWage) {
 		//variables
 		int totalWage=0;
 		int totalWorkingHour=0;
@@ -36,19 +38,21 @@ public class Employee_Wage{
 			   }
 			   totalWorkingHour=empHrs+totalWorkingHour;
 			   totalWorkingDays++;
-			   empWage=empHrs*empRatePerHour;
-			   totalWage=empWage+totalWage;
+			   empWage=empHrs*CompanyEmpWage.empRatePerHour;
+			   companyEmpWage.totalEmpWage=empWage+companyEmpWage.totalEmpWage;
 			   System.out.println("Employee Wage on "+totalWorkingDays+" Day is: "+empWage);
-			   if(totalWorkingDays==numOfWorkingDays||totalWorkingHour>=maxHoursPerMonth)
+			   if(totalWorkingDays==companyEmpWage.numOfWorkingDays||totalWorkingHour>=companyEmpWage.maxHoursPerMonth)
 				   break;
-			   }
-	  System.out.println("Total Employee Wage = "+totalWage);	
+	         }
+	  System.out.println("Total Employee Wage = "+companyEmpWage.totalWage);	
+	  return companyEmpWage.totalWage;
 	  }
 	  public static void main(String[] args){
-	    Employee_Wage capgemini =new Employee_Wage ("capgemini",20,2,10);
-	    Employee_Wage  bridgelabz=new Employee_Wage ("bridgelabz",20,5,30);
-	    capgemini.computeEmpWage();
-	    bridgelabz.computeEmpWage();
+	    Employee_Wage empWager =new Employee_Wage();
+	    empWage.addCompanyEmpWage("capgemini", 20,22,120);
+	    empWage.addCompanyEmpWage("bridgelabz", 20,22,120);
+	    empWage.computeEmpWage();
+	    
 	    
 	  }
 }
