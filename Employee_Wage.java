@@ -1,4 +1,6 @@
 package com.bridgelabz.problem;
+import com.bridgelabz.problem.IComputeEmpWage;
+import com.bridgelabz.problem.CompanyEmpWage;
 public class Employee_Wage{
 	public static final int IS_FULL_TIME = 0;
 	public static final int IS_PART_TIME=1;
