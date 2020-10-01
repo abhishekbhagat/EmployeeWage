@@ -4,22 +4,26 @@ import com.bridgelabz.problem.CompanyEmpWage;
 public class Employee_Wage{
 	public static final int IS_FULL_TIME = 0;
 	public static final int IS_PART_TIME=1;
-	private int numOfCompany=0;
-	private CompanyEmpWage[] companyEmpWageArray;
-	public Employee_Wage()
+	private  LinkedList<CompanyEmpWage> companyEmpWageList;
+	private Map<String,CompanyEmpWage> companyToEmpWageMap;
+	public EmpWageBuilder()
 	{
-		companyEmpWageArray=new CompanyEmpWage[5];
+		companyEmpWageList=new LinkedList<>();
+		companyToEmpWageMap=new HashMap<>();
 	}
+	
 	public static void addCompanyEmpWage(String company,int empRatePerHour,int numOfWorkingDays,int maxHoursPerMonth){
-		companyEmpWageArray[numOfCompany]=new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth)
-		numOfCompany++;
+		CompanyEmpWage companyEmpWage=new CompanyEmpWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth)
+		companyEmpWageList.add(companyEmpWage);
+                companyToEmpWageMap.put(company,companyEmpWage);
 	}
 	public void computeEmpWage(){
-		for(int i=0;i<numOfCompany;i++){
-			companyEmpWageArray[i].setTotalEmpWaage(this.computeEmpwage(companyEmpWageArray[i]));
-			System.out.println(companyEmpWageArray[i]);
+		for(int i=0;i<companyEmpWageList;i++){
+                        CompanyEmpWage companyEmpWage= companyEmpWageList.get(i);
+			companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+			System.out.println(companyEmpWage);
 		}
-		private int computeEmpWage(CompanyEmpWage companyEmpWage) {
+	private int computeEmpWage(CompanyEmpWage companyEmpWage) {
 		//variables
 		int totalWage=0;
 		int totalWorkingHour=0;
@@ -40,21 +44,22 @@ public class Employee_Wage{
 			   }
 			   totalWorkingHour=empHrs+totalWorkingHour;
 			   totalWorkingDays++;
-			   empWage=empHrs*CompanyEmpWage.empRatePerHour;
-			   companyEmpWage.totalEmpWage=empWage+companyEmpWage.totalEmpWage;
+			   empWage=empHrs*companyEmpWage.getEmpRatePerHour();
+			   totalWage=empWage+totalWage;
 			   System.out.println("Employee Wage on "+totalWorkingDays+" Day is: "+empWage);
 			   if(totalWorkingDays==companyEmpWage.numOfWorkingDays||totalWorkingHour>=companyEmpWage.maxHoursPerMonth)
-				   break;
+				   break
 	         }
-	  System.out.println("Total Employee Wage = "+companyEmpWage.totalWage);	
-	  return companyEmpWage.totalWage;
-	  }
-	  public static void main(String[] args){
+	companyEmpWage.setTotalEmpWage(totalWage);
+	System.out.println("Total Employee Wage = "+companyEmpWage.totalEmpWage);	
+	return companyEmpWage.totalEmpWage;
+	}
+	public static void main(String[] args){
 	    Employee_Wage empWager =new Employee_Wage();
 	    empWage.addCompanyEmpWage("capgemini", 20,22,120);
 	    empWage.addCompanyEmpWage("bridgelabz", 20,22,120);
 	    empWage.computeEmpWage();
 	    
 	    
-	  }
+       }
 }
